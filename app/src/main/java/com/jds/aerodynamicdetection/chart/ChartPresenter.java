@@ -14,8 +14,7 @@ public class ChartPresenter implements Contract.Presenter
     private Contract.View mView;
     private DataSource mModel;
 
-    private Thread insertThread = null;
-    private boolean run = true;
+
 
     public ChartPresenter(Contract.View view)
     {
@@ -27,40 +26,9 @@ public class ChartPresenter implements Contract.Presenter
     public void start()
     {
         mModel = DataRepository.getInstance(MyApp.getContext());
-        startThread();
+
     }
 
-    /**
-     * 开启定时线程
-     */
-    private void startThread()
-    {
-//        insertThread = new Thread(new Runnable()
-//        {
-//            @Override
-//            public void run()
-//            {
-//                int i = 1;
-//                while(run && i<50)
-//                {
-//                    DetectionData data = new DetectionData();
-//                    data.setaTorque(i++);
-//
-//                    mModel.insertData(data);
-//                    data = null;
-//
-//                    try
-//                    {
-//                        Thread.sleep(1000);
-//                    } catch (InterruptedException e)
-//                    {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            }
-//        });
-//        insertThread.start();
-    }
 
     @Override
     public void getLatestDetectionData()
@@ -68,9 +36,4 @@ public class ChartPresenter implements Contract.Presenter
         mView.drawDynamicChart(mModel.getLatestData());
     }
 
-    @Override
-    public void stopAllThread()
-    {
-        run = false;
-    }
 }

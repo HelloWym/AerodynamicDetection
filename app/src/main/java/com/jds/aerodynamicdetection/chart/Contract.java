@@ -14,7 +14,6 @@ public interface Contract
     {
         void getLatestDetectionData();
 
-        void stopAllThread();
     }
 
     interface View extends MyViewINF<Presenter>

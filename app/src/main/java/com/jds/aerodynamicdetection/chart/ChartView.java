@@ -79,7 +79,6 @@ public class ChartView extends MyActivity implements Contract.View
     {
         timer.cancel();
         timer = null;
-        mPresenter.stopAllThread();
         super.onDestroy();
     }
 
@@ -151,7 +150,6 @@ public class ChartView extends MyActivity implements Contract.View
 
         Entry entry = new Entry(series.size(), newValue);
         series.add(entry);
-        //mDataSet.addEntry(entry);
 
         if(series.size() > max_point_of_chart)
         {
