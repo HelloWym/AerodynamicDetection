@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--高度-->
+    <dimen name="elevation_toolbar">4dp</dimen>
+    <dimen name="elevation_dialog">24dp</dimen>
+    <dimen name="elevation_picker">24dp</dimen>
+
+    <dimen name="elevation_drawer">16dp</dimen>
+    <dimen name="elevation_fab_pressed">12dp</dimen>
+    <dimen name="elevation_submenu">9dp</dimen>
+    <dimen name="elevation_menu">8dp</dimen>
+    <dimen name="elevation_card_picked">8dp</dimen>
+    <dimen name="elevation_button_pressed">8dp</dimen>
+    <dimen name="elevation_fab">6dp</dimen>
+    <dimen name="elevation_snackbar">6dp</dimen>
+    <dimen name="elevation_appbar">4dp</dimen>
+    <dimen name="elevation_card">2dp</dimen>
+    <dimen name="elevation_button">2dp</dimen>
+    <dimen name="elevation_switch">1dp</dimen>
+
+    <!--字体大小-->
+    <dimen name="button">14sp</dimen>
+    <dimen name="menu">14sp</dimen>
+    <dimen name="body">14sp</dimen>
+    <dimen name="subhead">16sp</dimen>
+    <dimen name="title">20sp</dimen>
+    <dimen name="headline">24sp</dimen>
+    <dimen name="display1">34sp</dimen>
+
+    <dimen name="margin_list_item">16dp</dimen>
+    <dimen name="margin_list_left_avatar">72dp</dimen>
+    <dimen name="margin_list_right_icon">32dp</dimen>
+    <dimen name="height_status_bar">24dp</dimen>
+    <dimen name="height_titlebar">56dp</dimen>
+    <dimen name="height_title_lg">72dp</dimen>
+    <dimen name="height_title_md">48dp</dimen>
+    <dimen name="height_list_item">72dp</dimen>
+    <dimen name="height_classify">8dp</dimen>
+
+    <dimen name="width_item">48dp</dimen>
+    <dimen name="width_item_icon">40dp</dimen>
+    <dimen name="width_item_icon_sm">24dp</dimen>
+
+
+</resources>
