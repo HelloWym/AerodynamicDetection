@@ -7,29 +7,9 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.5"
-        android:background="@color/colorPrimary"
-
+        android:layout_weight="0.58"
+        android:orientation="vertical"
         >
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:src="@mipmap/ic_launcher_round"
-            android:layout_marginLeft="20dp"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-
-            android:textSize="@dimen/title"
-            android:text="@string/app_name"
-
-            android:textColor="#fff"
-            />
-
-
     </FrameLayout>
 
     <LinearLayout
@@ -37,6 +17,9 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="vertical"
+        android:layout_margin="10dp"
+        android:padding="5dp"
+        android:background="@drawable/bg_dash_line"
         >
 
 
@@ -48,28 +31,17 @@
             >
 
             <TextView
-                android:layout_width="50dp"
-                android:layout_height="match_parent"
-                android:text="扭矩"
-                android:textSize="@dimen/title"
-                android:gravity="center"
-                />
-
-            <TextView
                 android:id="@+id/txt_torque"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:textSize="@dimen/title"
+                android:background="@drawable/bg_round_corner"
+                android:layout_margin="5dp"
+
+                android:elevation="@dimen/elevation_button"
                 ></TextView>
 
-            <TextView
-                android:layout_width="50dp"
-                android:layout_height="match_parent"
-                android:text="频率"
-                android:textSize="@dimen/title"
-                android:gravity="center"
-                />
 
             <TextView
                 android:id="@+id/txt_frequent"
@@ -77,15 +49,10 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:textSize="@dimen/title"
+                android:background="@drawable/bg_round_corner"
+                android:layout_margin="5dp"
+                android:elevation="@dimen/elevation_button"
                 ></TextView>
-
-            <TextView
-                android:layout_width="50dp"
-                android:layout_height="match_parent"
-                android:text="转速"
-                android:textSize="@dimen/title"
-                android:gravity="center"
-                />
 
             <TextView
                 android:id="@+id/txt_revolution"
@@ -93,6 +60,9 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:textSize="@dimen/title"
+                android:background="@drawable/bg_round_corner"
+                android:layout_margin="5dp"
+                android:elevation="@dimen/elevation_button"
                 ></TextView>
 
         </LinearLayout>
@@ -104,13 +74,6 @@
             android:orientation="horizontal"
             >
 
-            <TextView
-                android:layout_width="50dp"
-                android:layout_height="match_parent"
-                android:text="气流量"
-                android:textSize="@dimen/title"
-                android:gravity="center"
-                />
 
             <TextView
                 android:id="@+id/txt_flowrate"
@@ -118,15 +81,11 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:textSize="@dimen/title"
+                android:background="@drawable/bg_round_corner"
+                android:layout_margin="5dp"
+                android:elevation="@dimen/elevation_button"
                 ></TextView>
 
-            <TextView
-                android:layout_width="50dp"
-                android:layout_height="match_parent"
-                android:text="气流量"
-                android:textSize="@dimen/title"
-                android:gravity="center"
-                />
 
             <TextView
                 android:id="@+id/txt_gasPressure"
@@ -134,23 +93,21 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:textSize="@dimen/title"
+                android:background="@drawable/bg_round_corner"
+                android:layout_margin="5dp"
+                android:elevation="@dimen/elevation_button"
                 ></TextView>
 
 
-            <TextView
-                android:layout_width="50dp"
-                android:layout_height="match_parent"
-                android:text="扭矩"
-                android:textSize="@dimen/title"
-                android:gravity="center"
-                android:visibility="invisible"
-                />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text=""
+                android:background="@drawable/bg_round_corner"
+                android:layout_margin="5dp"
+                android:elevation="@dimen/elevation_button"
                 ></TextView>
 
         </LinearLayout>
@@ -163,12 +120,15 @@
         android:layout_weight="5"
         android:orientation="vertical"
         >
+
         <com.github.mikephil.charting.charts.LineChart
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/chart_main"
+            android:layout_margin="10dp"
+            android:padding="5dp"
+            android:background="@drawable/bg_dash_line"
             >
-
 
         </com.github.mikephil.charting.charts.LineChart>
 
