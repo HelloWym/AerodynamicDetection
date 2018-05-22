@@ -6,7 +6,7 @@ package com.jds.aerodynamicdetection;
 
 public class Params
 {
-    public static final long updatePeriod = 1000;
+    public static final long updatePeriod = 500;
 
     public static final int max_point_of_chart = 10;
 
