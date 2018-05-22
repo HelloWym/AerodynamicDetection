@@ -217,11 +217,15 @@ public class CoreService extends Service implements OnOpenSerialPortListener
 
     }
 
+    /**
+     * 字节消息处理
+     * @param msg
+     */
     private void handleMsg(byte[] msg)
     {
         int length = msg.length;
 
-        if(length == 32
+        if(length == 32 //至多 32byte，超过的 4byte丢弃
                 && msg[0]==(byte)0xAB && msg[1]==(byte)0xEF
 //                && msg[length-4]==(byte)0xFF && msg[length-3]==(byte)0xFC
 //                && msg[length-2]==(byte)0xFF && msg[length-1]==(byte)0xFF
@@ -264,7 +268,7 @@ public class CoreService extends Service implements OnOpenSerialPortListener
 
             mModel.updateNewData(data);
             mModel.updateMaxData(maxData);
-            String info = mModel.insertData(data);//最慢的放最后
+            String info = mModel.insertData(data);//最慢的放最后，堵塞？开另外的线程插入？
 
             data = null;
             maxData = null;

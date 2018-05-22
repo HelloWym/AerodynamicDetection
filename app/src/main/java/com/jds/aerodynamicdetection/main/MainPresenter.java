@@ -80,14 +80,14 @@ public class MainPresenter implements Contract.Presenter
                 {
                     mSb.append(
                             en.getDateRecord()+" | "
-                            + " 扭矩 : " + en.getaTorque()+" | "
-                            + " 频率 : "+ en.getbFrequent()+" | "
-                            + " 转速 : " + en.getcRevolution()+" | "
-                            + " 流量 : " + en.getdFlowrate()+" | "
-                            + " 气压 : " + en.geteGasPressure()+" | "
-                            + " 温度1 : " + en.getfTemp()+" | "
-                            + " 温度2 : " + en.getgTemp()+" | "
-                            + " 温度3 : " + en.gethTemp()+" | "
+                            + " 扭矩 : " + en.getaTorque()+"   "
+                            + " 频率 : "+ en.getbFrequent()+"   "
+                            + " 转速 : " + en.getcRevolution()+"   "
+                            + " 流量 : " + en.getdFlowrate()+"   "
+                            + " 气压 : " + en.geteGasPressure()+"   "
+                            + " 温度1 : " + en.getfTemp()+"   "
+                            + " 温度2 : " + en.getgTemp()+"   "
+                            + " 温度3 : " + en.gethTemp()+"   "
                             + "\r\n");
                 }
 
