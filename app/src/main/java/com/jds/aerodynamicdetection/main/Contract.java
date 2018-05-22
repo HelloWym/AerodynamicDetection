@@ -14,22 +14,22 @@ public interface Contract
     interface Presenter extends MyPresenterINF
     {
         void getLatestDetectionData();
+
+        void getMaxData();
+
+        void exportData(String start, String end);
     }
 
     interface View extends MyViewINF<Presenter>
     {
         //更新数值显示
         void updateNewDetectionData(DetectionData data);
-        //更新图表
-        void updateChart(DetectionData data);
-        //更新图表和数值
-        void updateChartAndLatestValue(DetectionData data);
-        //切换到A数据图标
-        void switchAData();
-        void switchBData();
-        void switchCData();
-        void switchDData();
-        void switchEData();
+
+        void updateMaxData(DetectionData data);
+
+        void showExportSuccess();
+
+        void showExportFail();
 
     }
 }

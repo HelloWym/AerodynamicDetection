@@ -29,4 +29,6 @@ dependencies {
 
     compile 'com.github.kongqw:AndroidSerialPort:1.0.1'
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.3'
+
+//    compile 'com.tencent.bugly:crashreport_upgrade:latest.release'
 }

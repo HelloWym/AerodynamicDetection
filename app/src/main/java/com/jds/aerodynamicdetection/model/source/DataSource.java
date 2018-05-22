@@ -20,7 +20,7 @@ public interface DataSource
      * @param callback 反馈
      * @return
      */
-    void getData(String start, String end, LoadDataCallBback callback);
+    void getData(String start, String end, LoadDataCallback callback);
 
     /**
      * 插入新数据到数据库，更新船新数据
@@ -28,6 +28,14 @@ public interface DataSource
      * @return
      */
     String insertData(DetectionData data);
+
+    void updateNewData(DetectionData data);
+
+    void updateMaxData(DetectionData data);
+
+    void resetMaxData();
+
+    DetectionData getMaxData();
 
     /**
      * 删除单条数据
@@ -43,7 +51,7 @@ public interface DataSource
     DetectionData getLatestData();
 
 
-    interface LoadDataCallBback
+    interface LoadDataCallback
     {
         void onDataLoaded(List<DetectionData> datas);
 

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 
+import com.jds.aerodynamicdetection.Params;
 import com.jds.aerodynamicdetection.base.LogToFile;
 import com.jds.aerodynamicdetection.base.Util;
 import com.jds.aerodynamicdetection.model.DetectionData;
@@ -16,7 +17,9 @@ import com.kongqw.serialportlibrary.listener.OnOpenSerialPortListener;
 import com.kongqw.serialportlibrary.listener.OnSerialPortDataListener;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Queue;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -49,11 +52,13 @@ public class CoreService extends Service implements OnOpenSerialPortListener
 
     private Queue<byte[]> msgs= new ArrayBlockingQueue<byte[]>(100);
 
-    private boolean heart = true;
+    public static boolean heart = true;
 
     private byte[] HEART_BREAK = {(byte)0x01, (byte)0x02};
 
     private Queue<byte[]> tempData = new LinkedBlockingQueue<>();
+
+    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     @Nullable
     @Override
@@ -95,15 +100,16 @@ public class CoreService extends Service implements OnOpenSerialPortListener
             .setOnSerialPortDataListener(new OnSerialPortDataListener() {
                 @Override
                 public void onDataReceived(byte[] bytes) {
-                    mSb.append("\r\n onDataReceived [ byte[] ]: " + Arrays.toString(bytes));
-                    //mSb.append("\r\n onDataReceived [ String ]: " + new String(bytes));
+
+                    if(Params.debug)
+                       mSb.append("\r\n onDataReceived [ byte[] ]: " + Arrays.toString(bytes));
 
                     tempData.add(bytes);
                 }
 
                 @Override
                 public void onDataSent(byte[] bytes) {
-                    mSb.append("\r\n onDataSent [ byte[] ]: " + Arrays.toString(bytes));
+                    //mSb.append("\r\n onDataSent [ byte[] ]: " + Arrays.toString(bytes));
                     //mSb.append("\r\n onDataSent [ String ]: " + new String(bytes));
                 }
             })
@@ -159,6 +165,10 @@ public class CoreService extends Service implements OnOpenSerialPortListener
                                 }
                             }
                         }
+
+                        // 终止
+                        stopSelf();
+
                     }
                 }).start();
 
@@ -209,10 +219,13 @@ public class CoreService extends Service implements OnOpenSerialPortListener
 
     private void handleMsg(byte[] msg)
     {
-        if(msg.length==29
+        int length = msg.length;
+
+        if(length == 32
                 && msg[0]==(byte)0xAB && msg[1]==(byte)0xEF
-                && msg[25]==(byte)0xFF && msg[26]==(byte)0xFC
-                && msg[27]==(byte)0xFF && msg[28]==(byte)0xFF)
+//                && msg[length-4]==(byte)0xFF && msg[length-3]==(byte)0xFC
+//                && msg[length-2]==(byte)0xFF && msg[length-1]==(byte)0xFF
+                )
         {
             int a = msg[9]*256+msg[10];
             int b = msg[11]*256+msg[12];
@@ -223,8 +236,14 @@ public class CoreService extends Service implements OnOpenSerialPortListener
             int g = msg[21]*256+msg[22];
             int h = msg[23]*256+msg[24];
 
+            int flag = msg[25];
+
+            int maxA = msg[26]*256+msg[27];
+            int maxB = msg[28]*256+msg[29];
+            int maxC = msg[30]*256+msg[31];
+
             DetectionData data = new DetectionData();
-            data.setaTorque(a);
+            data.setaTorque(flag==1?a:-a);
             data.setbFrequent(b);
             data.setcRevolution(c);
             data.setdFlowrate(d);
@@ -233,8 +252,22 @@ public class CoreService extends Service implements OnOpenSerialPortListener
             data.setgTemp(g);
             data.sethTemp(h);
 
-            String info = mModel.insertData(data);
+            DetectionData maxData = new DetectionData();
+            maxData.setaTorque(flag==1?maxA:-maxA);
+            maxData.setbFrequent(maxB);
+            maxData.setcRevolution(maxC);
+
+            //数据时间赋值
+            Date date = new Date();
+            data.setDateRecord(sdf.format(date));
+            data.setMs(date.getTime());
+
+            mModel.updateNewData(data);
+            mModel.updateMaxData(maxData);
+            String info = mModel.insertData(data);//最慢的放最后
+
             data = null;
+            maxData = null;
 
             mSb.append(info+"/r/n");
         }

@@ -1,11 +1,11 @@
 package com.jds.aerodynamicdetection.init;
 
 import android.content.Intent;
-import android.util.DisplayMetrics;
+import android.os.Handler;
+import android.os.Message;
 import android.widget.TextView;
 
 import com.jds.aerodynamicdetection.R;
-import com.jds.aerodynamicdetection.base.LogToFile;
 import com.jds.aerodynamicdetection.base.MyActivity;
 import com.jds.aerodynamicdetection.main.MainView;
 import com.jds.aerodynamicdetection.service.CoreService;
@@ -25,6 +25,37 @@ public class InitView extends MyActivity implements Contract.View, OnOpenSerialP
     private Contract.Presenter mPresent;
 
     private TextView txtDebug;
+
+
+    public static final int HANDLER_SERIAL_OK = 10;
+    public static final int HANDLER_SERIAL_FAIL = 11;
+
+    public static final int HANDLER_DATABASE_OK = 20;
+    public static final int HANDLER_DATABASE_FAIL = 21;
+
+    public static final int HANDLER_ALL_OK = 50;
+
+
+
+    public Handler mHandler = new Handler()
+    {
+        @Override
+        public void handleMessage(Message msg)
+        {
+            switch (msg.what){
+                case HANDLER_SERIAL_OK:
+                    showDebugInfo("串口打开成功");
+                    break;
+                case HANDLER_DATABASE_OK:
+                    showDebugInfo("数据库连接成功");
+                    break;
+                case HANDLER_ALL_OK:
+                    showDebugInfo("加载完成");
+                    jumpToMainActivity();
+                    break;
+            }
+        }
+    };
 
     @Override
     protected int getLayoutId()
@@ -51,12 +82,16 @@ public class InitView extends MyActivity implements Contract.View, OnOpenSerialP
 
         startService();
 
-        jumpToMainActivity();
+        Message msg = new Message();
+        msg.what = HANDLER_SERIAL_OK;
+        mHandler.sendMessageDelayed(msg, 500);
+        msg = new Message();
+        msg.what = HANDLER_DATABASE_OK;
+        mHandler.sendMessageDelayed(msg, 1000);
+        msg = new Message();
+        msg.what = HANDLER_ALL_OK;
+        mHandler.sendMessageDelayed(msg, 1500);
 
-        DisplayMetrics dm = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(dm);
-
-        LogToFile.d("TAG", "DPI:"+dm.densityDpi+" height:"+dm.heightPixels+" width:"+dm.widthPixels);
     }
 
     private String TAG = "InitView";
@@ -90,12 +125,12 @@ public class InitView extends MyActivity implements Contract.View, OnOpenSerialP
     public void jumpToMainActivity()
     {
         this.jumpActivity(MainView.class);
+        finish();
     }
 
     @Override
     protected void onDestroy()
     {
-        stopService();
         super.onDestroy();
     }
 

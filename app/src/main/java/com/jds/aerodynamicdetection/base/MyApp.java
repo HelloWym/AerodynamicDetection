@@ -20,9 +20,8 @@ public class MyApp extends Application {
 
         LogToFile.init(this);
 
-        //TODO 修复
-//        //TODO APPID
-//        Bugly.init(getApplicationContext(), "c259e2c23f", false);
+
+//        Bugly.init(getApplicationContext(), "64579cd645", false);
 //
 //        //XG
 //        XGPushConfig.enableDebug(this,true);

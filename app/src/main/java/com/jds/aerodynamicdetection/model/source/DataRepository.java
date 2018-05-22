@@ -10,7 +10,6 @@ import com.jds.aerodynamicdetection.model.DetectionData;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -28,6 +27,10 @@ public class DataRepository implements DataSource
     //船新的数据
     private DetectionData timelyData = new DetectionData();
 
+    //保留最大值
+    private DetectionData maxData = new DetectionData();
+
+
     private DataRepository(@NonNull Context context)
     {
         mDbHelper = new DBHelper(context);
@@ -42,7 +45,7 @@ public class DataRepository implements DataSource
     }
 
     @Override
-    public void getData(String start, String end, LoadDataCallBback callback)
+    public void getData(String start, String end, LoadDataCallback callback)
     {
         List<DetectionData> datas = new ArrayList<DetectionData>();
         SQLiteDatabase db = mDbHelper.getReadableDatabase();
@@ -60,7 +63,7 @@ public class DataRepository implements DataSource
                 "hTemp"
         };
 
-        String selection = "dateRecord > ? AND dateRecord < ?";
+        String selection = "dateRecord > ? AND dateRecord < ? limit 500";
         String[] selectionArgs = {start, end};
 
         Cursor c = db.query(
@@ -117,13 +120,6 @@ public class DataRepository implements DataSource
         if(data==null)
             return "插入数据不合法";
 
-        Date date = new Date();
-        data.setDateRecord(sdf.format(date));
-        data.setMs(date.getTime());
-
-        //更新缓存值
-        timelyData = data;
-
         //插入数据库
         SQLiteDatabase db = mDbHelper.getWritableDatabase();
         ContentValues entity = new ContentValues();
@@ -145,6 +141,42 @@ public class DataRepository implements DataSource
     }
 
     @Override
+    public void updateNewData(DetectionData data)
+    {
+        timelyData = data;
+    }
+
+    @Override
+    public void updateMaxData(DetectionData data)
+    {
+//        if(data.getaTorque()>maxData.getaTorque())
+//            maxData.setaTorque(data.getaTorque());
+//        if(data.getbFrequent()>maxData.getbFrequent())
+//            if(data.getcRevolution()>maxData.getcRevolution())
+//                maxData.setbFrequent(data.getbFrequent());
+//        maxData.setcRevolution(data.getcRevolution());
+//        if(data.getdFlowrate()>maxData.getdFlowrate())
+//            maxData.setdFlowrate(data.getdFlowrate());
+//        if(data.geteGasPressure()>maxData.geteGasPressure())
+//            maxData.seteGasPressure(data.geteGasPressure());
+
+        maxData = data;
+
+    }
+
+    @Override
+    public DetectionData getMaxData()
+    {
+        return maxData;
+    }
+
+    @Override
+    public void resetMaxData()
+    {
+        maxData = new DetectionData();
+    }
+
+    @Override
     public String delData(long id)
     {
         return "暂未实现";
@@ -158,6 +190,7 @@ public class DataRepository implements DataSource
 
         return timelyData;
     }
+
 
 
 }

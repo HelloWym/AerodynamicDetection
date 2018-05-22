@@ -2,23 +2,27 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+            android:background="@drawable/welcome"
+    >
 
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello"
+        android:text="初始化"
         android:textSize="@dimen/title"
+        android:textColor="#D8ffffff"
         />
 
     <TextView
         android:id="@+id/txt_debug"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:hint="调试信息"
+        android:hint=""
         android:text=""
-        android:textSize="@dimen/body"
+        android:textSize="@dimen/title"
+        android:textColor="#D8ffffff"
         />
 
 
