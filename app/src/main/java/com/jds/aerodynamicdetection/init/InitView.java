@@ -84,13 +84,13 @@ public class InitView extends MyActivity implements Contract.View, OnOpenSerialP
 
         Message msg = new Message();
         msg.what = HANDLER_SERIAL_OK;
-        mHandler.sendMessageDelayed(msg, 500);
+        mHandler.sendMessageDelayed(msg, 200);
         msg = new Message();
         msg.what = HANDLER_DATABASE_OK;
-        mHandler.sendMessageDelayed(msg, 1000);
+        mHandler.sendMessageDelayed(msg, 500);
         msg = new Message();
         msg.what = HANDLER_ALL_OK;
-        mHandler.sendMessageDelayed(msg, 1500);
+        mHandler.sendMessageDelayed(msg, 800);
 
     }
 
@@ -126,6 +126,7 @@ public class InitView extends MyActivity implements Contract.View, OnOpenSerialP
     {
         this.jumpActivity(MainView.class);
         finish();
+
     }
 
     @Override

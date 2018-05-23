@@ -22,9 +22,23 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".main.MainView"/>
+        <activity android:name=".main.MainView"
+            >
 
-        <activity android:name=".chart.ChartView"/>
+        </activity>>
+
+        <activity android:name=".chart.ChartView">
+
+            <intent-filter>
+                <action android:name="android.intent.action.CALL"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+
+
+            </intent-filter>
+
+        </activity>
+
+
 
         <service android:name=".service.CoreService"/>
 
